@@ -8,6 +8,8 @@
 </head>
 <script>
 $(document).ready(function(){
+	$('#main_content').load('budget_overview.php');
+	
 	$('.navbar_link').on('click', function(){
 		var link = $(this).attr('href');
 		$('#main_content').load(link);
