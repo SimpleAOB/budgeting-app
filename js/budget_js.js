@@ -1,39 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<script src="js/jquery-2.1.4.min.js"></script>
-	<title>Will Display Title | Web App</title>
-	<style>
-		#income-table tr th:nth-child(1) {
-			text-align:left;
-		}
-		#income-table tr th:nth-child(2) {
-			text-align:right;
-			cursor: pointer;
-		}
-		#expense-table tr th:nth-child(1) {
-			text-align:left;
-		}
-		#expense-table tr th:nth-child(2) {
-			text-align:right;
-			cursor: pointer;
-		}
-	</style>
-</head>
-<body>
-	<button onclick="resetls()">Reset localStorage</button>
-	<button onclick="showls()">Show localStorage</button>
-	<div id="page-container">
-		<h2 id="title"></h2>
-		<table id="income-table">
-			
-		</table>
-		<table id="expense-table">
-
-		</table>
-	</div>
-	<script>
-		function resetls() {
+	function resetls() {
 		alert("Resetting jsd-bwa. Refresh page.");
 		localStorage.removeItem("jsdbwa");
 	}
@@ -136,8 +101,8 @@
 		document.title = ls[0]["title"] + " | Budget Web App";
 		document.getElementById("title").innerHTML = ls[0]["title"];
 
-		document.getElementById("income-table").innerHTML = "<tr><th>INCOME</th><th onclick=\"addIncomeRow()\">+New Field</th></tr>";
-		document.getElementById("expense-table").innerHTML = "<tr><th>EXPENSES</th><th onclick=\"addExpenseRow()\">+New Field</th></tr>";
+		document.getElementById("income-table").innerHTML = "<tr><th><span id='income_header'>INCOME</span></th><th onclick=\"addIncomeRow()\">+New Field</th></tr>";
+		document.getElementById("expense-table").innerHTML = "<tr><th><span id='expense_header'>EXPENSES</span></th><th onclick=\"addExpenseRow()\">+New Field</th></tr>";
 
 		for (var key in ls[3]["income_rows"]) {
 			document.getElementById("income-table").innerHTML += "<tr data-irow=\"" + key + "\"><td><input type=\"text\" data-irow=\"" + key + "\" name=\"name\" value=\"" + ls[3]["income_rows"][key]["row_name"] + "\" onblur=\"editRow(this)\"></td><td><input type=\"text\" data-irow=\"" + key + "\" name=\"val\" value=\"" + ls[3]["income_rows"][key]["row_value"] + "\" onblur=\"editRow(this)\"></td><td><button onclick=\"removeIncomeRow(this)\" data-irow=\"" + key + "\">Delete</button></td></tr>";
@@ -146,6 +111,3 @@
 			document.getElementById("expense-table").innerHTML += "<tr data-erow=\"" + key + "\"><td><input type=\"text\" data-erow=\"" + key + "\" name=\"name\" value=\"" + ls[4]["expense_rows"][key]["row_name"] + "\" onblur=\"editRow(this)\"></td><td><input type=\"text\" data-erow=\"" + key + "\" name=\"val\" value=\"" + ls[4]["expense_rows"][key]["row_value"] + "\" onblur=\"editRow(this)\"></td><td><button onclick=\"removeExpenseRow(this)\" data-erow=\"" + key + "\">Delete</button><td/></tr>";
 		}
 	}
-	</script>
-</body>
-</html>

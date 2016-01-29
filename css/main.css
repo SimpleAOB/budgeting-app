@@ -53,3 +53,18 @@ a {
 	height: 300px;
 }
 
+#income-table tr th:nth-child(1) {
+	text-align:left;
+}
+#income-table tr th:nth-child(2) {
+	text-align:right;
+	cursor: pointer;
+}
+#expense-table tr th:nth-child(1) {
+	text-align:left;
+}
+#expense-table tr th:nth-child(2) {
+	text-align:right;
+	cursor: pointer;
+}
+
