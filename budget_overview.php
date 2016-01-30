@@ -30,8 +30,16 @@
                 });
                 initBWA.push({
                     static_vals: [{
-                            net_income: 0
+                            net_income: 0,
+                            cc_mpmts: 0,
+                            cc_balance: 0
                         }]
+                });
+                initBWA.push({
+                    cc_rows_num: 0
+                });
+                initBWA.push({
+                    cc_rows: []
                 });
                 localStorage.jsdbwa = JSON.stringify(initBWA);
                 showls();

@@ -1,4 +1,21 @@
 <script>
+    function calmPmts() {
+        var ls = JSON.parse(localStorage.jsdbwa);
+        ls[5]["static_vals"][0]["cc_mpmts"] = 0;
+        for (var key in ls[7]["cc_rows"]) {
+            ls[5]["static_vals"][0]["cc_mpmts"] += Number(ls[7]["cc_rows"][key]["cc_mpmt"]);
+        }
+        localStorage.jsdbwa = JSON.stringify(ls);
+    }
+
+    function calBal() {
+        var ls = JSON.parse(localStorage.jsdbwa);
+        ls[5]["static_vals"][0]["cc_balance"] = 0;
+        for (var key in ls[7]["cc_rows"]) {
+            ls[5]["static_vals"][0]["cc_balance"] += Number(ls[7]["cc_rows"][key]["cc_bal"]);
+        }
+        localStorage.jsdbwa = JSON.stringify(ls);
+    }
 
     function addCCRow() {
         var ls = JSON.parse(localStorage.jsdbwa);
@@ -8,7 +25,7 @@
             cc_name: "New CC Name",
             cc_date: "1st",
             cc_apr: 0.15,
-            cc_min_pmt: 50,
+            cc_mpmt: 50,
             cc_bal: 9001
         });
 
@@ -34,7 +51,7 @@
             } else if ($(row).attr('name') == "apr"){
                 ls[7]["cc_rows"][$(row).data("ccrow")]["cc_apr"] = $(row).val();
             } else if ($(row).attr('name') == "mpmt"){
-                ls[7]["cc_rows"][$(row).data("ccrow")]["cc_min_pmt"] = $(row).val();
+                ls[7]["cc_rows"][$(row).data("ccrow")]["cc_mpmt"] = $(row).val();
             } else if ($(row).attr('name') == "bal"){
                 ls[7]["cc_rows"][$(row).data("ccrow")]["cc_bal"] = $(row).val();
             }
@@ -51,6 +68,8 @@
     });
 
     function buildPage() {
+        calmPmts();
+        calBal();
         var ls = JSON.parse(localStorage.jsdbwa);
         document.getElementById("cc-table").innerHTML = `
             <tr>
@@ -65,8 +84,9 @@
             var name = ls[7]["cc_rows"][key]["cc_name"];
             var date = ls[7]["cc_rows"][key]["cc_date"];
             var apr = ls[7]["cc_rows"][key]["cc_apr"];
-            var mpmt = ls[7]["cc_rows"][key]["cc_min_pmt"];
+            var mpmt = ls[7]["cc_rows"][key]["cc_mpmt"];
             var bal = ls[7]["cc_rows"][key]["cc_bal"];
+
             document.getElementById("cc-table").innerHTML += `
             <tr data-ccrow="${key}">
                 <td>
@@ -90,6 +110,10 @@
             </tr>
             `;
         }
+        var tbal = ls[5]["static_vals"][0]["cc_balance"];
+        var mpmts = ls[5]["static_vals"][0]["cc_mpmts"];
+        document.getElementById("cc-table").innerHTML += `<div><span>Min Payments: ${mpmts}</span></div>`;
+        document.getElementById("cc-table").innerHTML += `<div><span>Balance: ${tbal}</span></div>`;
     }
 
 </script>
