@@ -68,7 +68,7 @@
             var mpmt = ls[7]["cc_rows"][key]["cc_min_pmt"];
             var bal = ls[7]["cc_rows"][key]["cc_bal"];
             document.getElementById("cc-table").innerHTML += `
-            <tr data-irow="${key}">
+            <tr data-ccrow="${key}">
                 <td>
                     <input type="text" data-ccrow="${key}" name="name" value="${name}" onblur="editRow(this)">
                 </td>
