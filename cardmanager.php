@@ -60,9 +60,7 @@
         buildPage();
     }
 
-    $(function () {
-        buildPage();
-    });
+    buildPage();
     $("#add-new-card").click(function () {
        addCCRow();
     });
@@ -71,15 +69,15 @@
         calmPmts();
         calBal();
         var ls = JSON.parse(localStorage.jsdbwa);
-        document.getElementById("cc-table").innerHTML = `
-            <tr>
-                <th>Card Name</th>
-                <th>Due Date</th>
-                <th>APR</th>
-                <th>Min Pmt</th>
-                <th>Balance</th>
-            </tr>
-        `;
+        document.getElementById("cc-table").innerHTML = ''+
+            '<tr>' +
+            '    <th>Card Name</th>' +
+            '    <th>Due Date</th>' +
+            '    <th>APR</th>' +
+            '    <th>Min Pmt</th>' +
+            '    <th>Balance</th>' +
+            '</tr>' +
+        '';
         for (var key in ls[7]["cc_rows"]) {
             var name = ls[7]["cc_rows"][key]["cc_name"];
             var date = ls[7]["cc_rows"][key]["cc_date"];
@@ -87,33 +85,52 @@
             var mpmt = ls[7]["cc_rows"][key]["cc_mpmt"];
             var bal = ls[7]["cc_rows"][key]["cc_bal"];
 
-            document.getElementById("cc-table").innerHTML += `
-            <tr data-ccrow="${key}">
-                <td>
-                    <input type="text" data-ccrow="${key}" name="name" value="${name}" onblur="editRow(this)">
-                </td>
-                <td>
-                    <input type="text" data-ccrow="${key}" name="date" value="${date}" onblur="editRow(this)">
-                </td>
-                <td>
-                    <input type="text" data-ccrow="${key}" name="apr" value="${apr}" onblur="editRow(this)">
-                </td>
-                <td>
-                    <input type="text" data-ccrow="${key}" name="mpmt" value="${mpmt}" onblur="editRow(this)">
-                </td>
-                <td>
-                    <input type="text" data-ccrow="${key}" name="bal" value="${bal}" onblur="editRow(this)">
-                </td>
-                <td>
-                    <button onclick="removeCCRow(this)" data-ccrow="${key}">Delete</button>
-                </td>
-            </tr>
-            `;
+            var template_builder = ''+
+            '<tr data-ccrow="${key}">' +
+            '    <td>' +
+            '        <input type="text" data-ccrow="${key}" name="name" value="${name}" onblur="editRow(this)">' +
+            '    </td>' +
+            '    <td>' +
+            '        <input type="text" data-ccrow="${key}" name="date" value="${date}" onblur="editRow(this)">' +
+            '    </td>' +
+            '    <td>' +
+            '        <input type="text" data-ccrow="${key}" name="apr" value="${apr}" onblur="editRow(this)">' +
+            '    </td>' +
+            '    <td>' +
+            '        <input type="text" data-ccrow="${key}" name="mpmt" value="${mpmt}" onblur="editRow(this)">' +
+            '    </td>' +
+            '    <td>' +
+            '        <input type="text" data-ccrow="${key}" name="bal" value="${bal}" onblur="editRow(this)">' +
+            '    </td>' +
+            '    <td>' +
+            '        <button onclick="removeCCRow(this)" data-ccrow="${key}">Delete</button>' +
+            '    </td>' +
+            '</tr>' +
+            '';
+            var template_key_built  = template_builder.replace(/\$\{key\}/gi, key);
+            var template_name_built = template_key_built.replace(/\$\{name\}/gi, name);
+            var template_date_built = template_name_built.replace(/\$\{date\}/gi, date);
+            var template_apr_built  = template_date_built.replace(/\$\{apr\}/gi, apr);
+            var template_mpmt_built = template_apr_built.replace(/\$\{mpmt\}/gi, mpmt);
+            var template_bal_built  = template_mpmt_built.replace(/\$\{bal\}/gi, bal);
+
+
+            var template_built = template_bal_built;
+            document.getElementById("cc-table").innerHTML += template_built;
+
         }
         var tbal = ls[5]["static_vals"][0]["cc_balance"];
         var mpmts = ls[5]["static_vals"][0]["cc_mpmts"];
-        document.getElementById("cc-table").innerHTML += `<div><span>Min Payments: ${mpmts}</span></div>`;
-        document.getElementById("cc-table").innerHTML += `<div><span>Balance: ${tbal}</span></div>`;
+
+        var template_builder = '' +
+        '<div><span>Min Payments: ${mpmts}</span></div>' +
+        '<div><span>Balance: ${tbal}</span></div>'+
+        '';
+        var template_mpmts_built  = template_builder.replace(/\$\{mpmts\}/gi, mpmts);
+        var template_tbal_built = template_mpmts_built.replace(/\$\{tbal\}/gi, tbal);
+
+        var template_built = template_tbal_built;
+        document.getElementById("cc-table").innerHTML += template_built;
     }
 
 </script>
