@@ -138,11 +138,12 @@
 <button onclick="showls()">Show localStorage</button>
 <div id="page-container">
     <h3 id="expense_header">Credit Card Manager</h3>
-    <span id="add-new-card">+Add Credit Card</span>
-    <div class="col-md-2 col-xs-3">names here</div>
-    <div class="col-md-2 col-xs-3">input here</div>
-    <div class="col-md-2 col-xs-3">names here</div>
-    <div class="col-md-2 col-xs-3">input here</div>
+    <span id="add-new-card"><b>+Add Credit Card</b></span><br><br>
+    <div class="col-md-2 col-xs-2">name here</div>
+    <div class="col-md-2 col-xs-2">due date here</div>
+    <div class="col-md-2 col-xs-2">apr here</div>
+    <div class="col-md-2 col-xs-2">min pmt here</div>
+     <div class="col-md-2 col-xs-2">bal here</div>
     <table id="cc-table">
     </table>
 </div>
