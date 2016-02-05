@@ -8,49 +8,7 @@
         console.log(localStorage.jsdbwa);
     }
     ///Start non debugging features
-
-    //Auto Run
-    if (typeof(Storage) !== "undefined") {
-        if (localStorage.jsdbwa == null) {
-            console.log("Initializing BWA array");
-            var initBWA = [];
-            initBWA.push({
-                title: "Unnamed Budget Project"
-            });
-            initBWA.push({
-                income_rows_num: 0
-            });
-            initBWA.push({
-                expense_rows_num: 0
-            });
-            initBWA.push({
-                income_rows: []
-            });
-            initBWA.push({
-                expense_rows: []
-            });
-            initBWA.push({
-                static_vals: [{
-                        net_income: 0,
-                        cc_mpmts: 0,
-                        cc_balance: 0
-                    }]
-            });
-            initBWA.push({
-                cc_rows_num: 0
-            });
-            initBWA.push({
-                cc_rows: []
-            });
-            localStorage.jsdbwa = JSON.stringify(initBWA);
-            showls();
-        }
-    } else {
-        alert("We are sorry, your device does not support localStorage. This application depends on it to save data.");
-    }
     buildPage();
-    //End Auto Run
-
     function addIncomeRow() {
         var ls = JSON.parse(localStorage.jsdbwa);
 
@@ -108,6 +66,7 @@
                 ls[4]["expense_rows"][$(row).data("erow")]["row_value"] = $(row).val();
             }
         }
+
         localStorage.jsdbwa = JSON.stringify(ls);
         buildPage();
     }
@@ -127,38 +86,19 @@
 
     function buildPage() {
         var ls = JSON.parse(localStorage.jsdbwa);
-        // document.title = ls[0]["title"] + " | Budget Web App";
-        // document.getElementById("title").innerHTML = ls[0]["title"];
 
-        document.getElementById("income-table").innerHTML = '' +
-        '<tr>' +
-        '    <th><h3 id="income_header">INCOME</h3></th>' +
-        '    <th onclick="addIncomeRow()">+New Field</th>' +
-        '</tr>' +
-        '';
-        document.getElementById("expense-table").innerHTML = ''+
-        '<tr>' +
-        '    <th><h3 id="expense_header">EXPENSES</h3></th>'+
-        '    <th onclick="addExpenseRow()">+New Field</th>' +
-        '</tr>' +
-        '';
-
+        document.getElementById("income-table").innerHTML = "";
+        document.getElementById("expense-table").innerHTML = "";
         for (var key in ls[3]["income_rows"]) {
             var name = ls[3]["income_rows"][key]["row_name"];
             var value = ls[3]["income_rows"][key]["row_value"];
 
             var template_builder = ''+
-            '<tr data-irow="${key}">' +
-            '    <td>' +
-            '        <input type="text" data-irow="${key}" name="name" value="${name}" onblur="editRow(this)">' +
-            '    </td>' +
-            '    <td>' +
-            '        <input type="text" data-irow="${key}" name="val" value="${value}" onblur="editRow(this)">' +
-            '    </td>' +
-            '    <td>' +
-            '        <button onclick="removeIncomeRow(this)" data-irow="${key}">Delete</button>' +
-            '    </td>' +
-            '</tr>' +
+            '<div data-irow="${key}" class="row">'+
+            '    <div id="income_name${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2"><input type="text" name="name" value="${name}" data-irow="${key}" onblur="editRow(this)"></div>'+
+            '    <div id="income_input${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2"><input type="text" name="val" value="${value}" data-irow="${key}" onblur="editRow(this)"></div>'+
+            '    <div id="income_del${key}" onclick="removeIncomeRow(this)" data-irow="${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">Delete</div>'+
+            '</div>'+
             '';
             var template_key_built = template_builder.replace(/\$\{key\}/gi, key);
             var template_name_built = template_key_built.replace(/\$\{name\}/gi, name);
@@ -173,17 +113,11 @@
             var value = ls[4]["expense_rows"][key]["row_value"];
 
             var template_builder = ''+
-            '<tr data-erow="${key}">' +
-            '    <td>' +
-            '        <input type="text" data-erow="${key}" name="name" value="${name}" onblur="editRow(this)">' +
-            '    </td>' +
-            '    <td>' +
-            '        <input type="text" data-erow="${key}" name="val" value="${value}" onblur="editRow(this)">' +
-            '    </td>' +
-            '    <td>' +
-            '        <button onclick="removeExpenseRow(this)" data-erow="${key}">Delete</button>' +
-            '    </td>' +
-            '</tr>' +
+            '<div data-erow="${key}" class="row">'+
+            '    <div id="expense_name${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2"><input type="text" name="name" value="${name}" data-erow="${key}" onblur="editRow(this)"></div>'+
+            '    <div id="expense_input${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2"><input type="text" name="val" value="${value}" data-erow="${key}" onblur="editRow(this)"></div>'+
+            '    <div id="expense_del${key}" onclick="removeExpenseRow(this)" data-erow="${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">Delete</div>'+
+            '</div>'+
             '';
             var template_key_built = template_builder.replace(/\$\{key\}/gi, key);
             var template_name_built = template_key_built.replace(/\$\{name\}/gi, name);
@@ -202,16 +136,18 @@
 <button onclick="showls()">Show localStorage</button>
     <div onload="pageInit()" id="page-container">
         <h2 id="title"></h2>
-        <table id="income-table">
-        <div class="row">
-            <div id="income_name" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">names here</div>
-            <div id="income_input" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">input here</div>
-</div>
-        </table>
-        <table id="expense-table">
-            <div id="expense_name" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">names here</div>
-            <div id="expense_input" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">input here</div>
-        </table>
+        <div class="income_header">
+            <h2 onclick="addIncomeRow()">Income</h2>
+        </div>
+        <div id="income-table">
+
+        </div>
+        <div class="expense_header">
+            <h2 onclick="addExpenseRow()">Expenses</h2>
+        </div>
+        <div id="expense-table">
+
+        </div>
         <div id="total_income">
             <div id="expense_name" class="col-md-4 col-xs-6 col-md-offset-3"><h3 id="expense_header">Total Income: </h3></div>
             <div id="expense_input" class="col-md-2 col-xs-2"><h3 id="total_incomeSum"></h3></div>
