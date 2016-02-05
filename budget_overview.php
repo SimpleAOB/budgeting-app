@@ -194,7 +194,7 @@
             document.getElementById("expense-table").innerHTML += template_built;
         }
         var net = buildNet();
-        document.getElementById("total_income").innerHTML = net;
+        document.getElementById("total_incomeSum").innerHTML = net;
     }
     </script>
 
@@ -204,14 +204,16 @@
         <h2 id="title"></h2>
         <table id="income-table">
         <div class="row">
-  <div class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">names here</div>
-  <div class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">input here</div>
+            <div id="income_name" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">names here</div>
+            <div id="income_input" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">input here</div>
 </div>
         </table>
         <table id="expense-table">
-
+            <div id="expense_name" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">names here</div>
+            <div id="expense_input" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">input here</div>
         </table>
         <div id="total_income">
-
+            <div id="expense_name" class="col-md-4 col-xs-6 col-md-offset-3"><h3 id="expense_header">Total Income: </h3></div>
+            <div id="expense_input" class="col-md-2 col-xs-2"><h3 id="total_incomeSum"></h3></div>
         </div>
     </div>
