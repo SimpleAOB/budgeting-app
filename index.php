@@ -13,25 +13,77 @@
     $(document).ready(function(){
 
 
-        $('#main_content').load('budget_overview.php');
+        if(window.location.hash == "#ccmanager") {
+            $('#main_content').load('cardmanager.php');
+            $(".nav").find(".active").removeClass("active");
+            $("#card_manager").addClass("active");
+        } else {
+            $('#main_content').load('budget_overview.php');
+        }
 
-        $('.navbar_link').on('click', function(){})
+        $('.navbar_link').on('click', function(){;})
 
         $('.toplink').on('click', function(){
             var link = $(this).attr('href');
             var id = $(this).attr('data-id');
 
-            $('#main_content').load(link);
+            var whereTo = $(this).attr('href');
+            if (whereTo == "budget_overview.php") {
+                window.location.hash = '';
+            } else if(whereTo == "cardmanager.php") {
+                window.location.hash = '#ccmanager';
+            }
 
-        
+            $('#main_content').load(link);
             return false;
-        })
+        });
 
         $(".nav a").on("click", function(){
-   $(".nav").find(".active").removeClass("active");
-   $(this).parent().addClass("active");
-});
+           $(".nav").find(".active").removeClass("active");
+           $(this).parent().addClass("active");
+        });
     });
+
+    //Auto Run
+    if (typeof(Storage) !== "undefined") {
+        if (localStorage.jsdbwa == null) {
+            console.log("Initializing BWA array");
+            var initBWA = [];
+            initBWA.push({
+                title: "Unnamed Budget Project"
+            });
+            initBWA.push({
+                income_rows_num: 0
+            });
+            initBWA.push({
+                expense_rows_num: 0
+            });
+            initBWA.push({
+                income_rows: []
+            });
+            initBWA.push({
+                expense_rows: []
+            });
+            initBWA.push({
+                static_vals: [{
+                        net_income: 0,
+                        cc_mpmts: 0,
+                        cc_balance: 0
+                    }]
+            });
+            initBWA.push({
+                cc_rows_num: 0
+            });
+            initBWA.push({
+                cc_rows: []
+            });
+            localStorage.jsdbwa = JSON.stringify(initBWA);
+            showls();
+        }
+    } else {
+        alert("We are sorry, your device does not support localStorage. This application depends on it to save data.");
+    }
+    //End Auto Run
 
     window.onload = function() {
         pageInit();
@@ -43,6 +95,7 @@
         } else {
             jqSupported = true;
         }
+
     }
 
 </script>
@@ -63,7 +116,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li data-id='1' class="active navbar_link" id="budget_overview"><a href="budget_overview.php" class="toplink">Budget Overview <span class="sr-only">(current)</span></a></li>
-        <li data-id='2' class="navbar_link" id-"card_manager"><a href="cardmanager.php" class="toplink">Credit Card Manager</a></li>
+        <li data-id='2' class="navbar_link" id="card_manager"><a href="cardmanager.php" class="toplink">Credit Card Manager</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

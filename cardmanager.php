@@ -69,15 +69,7 @@
         calmPmts();
         calBal();
         var ls = JSON.parse(localStorage.jsdbwa);
-        document.getElementById("cc-table").innerHTML = ''+
-            '<tr>' +
-            '    <th>Card Name</th>' +
-            '    <th>Due Date</th>' +
-            '    <th>APR</th>' +
-            '    <th>Min Pmt</th>' +
-            '    <th>Balance</th>' +
-            '</tr>' +
-        '';
+
         for (var key in ls[7]["cc_rows"]) {
             var name = ls[7]["cc_rows"][key]["cc_name"];
             var date = ls[7]["cc_rows"][key]["cc_date"];
@@ -86,26 +78,14 @@
             var bal = ls[7]["cc_rows"][key]["cc_bal"];
 
             var template_builder = ''+
-            '<tr data-ccrow="${key}">' +
-            '    <td>' +
-            '        <input type="text" data-ccrow="${key}" name="name" value="${name}" onblur="editRow(this)">' +
-            '    </td>' +
-            '    <td>' +
-            '        <input type="text" data-ccrow="${key}" name="date" value="${date}" onblur="editRow(this)">' +
-            '    </td>' +
-            '    <td>' +
-            '        <input type="text" data-ccrow="${key}" name="apr" value="${apr}" onblur="editRow(this)">' +
-            '    </td>' +
-            '    <td>' +
-            '        <input type="text" data-ccrow="${key}" name="mpmt" value="${mpmt}" onblur="editRow(this)">' +
-            '    </td>' +
-            '    <td>' +
-            '        <input type="text" data-ccrow="${key}" name="bal" value="${bal}" onblur="editRow(this)">' +
-            '    </td>' +
-            '    <td>' +
-            '        <button onclick="removeCCRow(this)" data-ccrow="${key}">Delete</button>' +
-            '    </td>' +
-            '</tr>' +
+            '<div data-ccrow="${key}" class="row">'+
+            '    <div class="col-md-2 col-xs-2"><input type="text" data-ccrow="${key}" name="name" value="${name}" onblur="editRow(this)"></div>'+
+            '    <div class="col-md-2 col-xs-2"><input type="text" data-ccrow="${key}" name="date" value="${date}" onblur="editRow(this)"></div>'+
+            '    <div class="col-md-2 col-xs-2"><input type="text" data-ccrow="${key}" name="apr" value="${apr}" onblur="editRow(this)"></div>'+
+            '    <div class="col-md-2 col-xs-2"><input type="text" data-ccrow="${key}" name="mpmt" value="${mpmt}" onblur="editRow(this)"></div>'+
+            '    <div class="col-md-2 col-xs-2"><input type="text" data-ccrow="${key}" name="bal" value="${bal}" onblur="editRow(this)"></div>'+
+            '    <div class="col-md-2 col-xs-2"><button onclick="removeCCRow(this)" data-ccrow="${key}">Delete</button></div>'+
+            '</div>'+
             '';
             var template_key_built  = template_builder.replace(/\$\{key\}/gi, key);
             var template_name_built = template_key_built.replace(/\$\{name\}/gi, name);
@@ -116,7 +96,7 @@
 
 
             var template_built = template_bal_built;
-            document.getElementById("cc-table").innerHTML += template_built;
+            document.getElementById("cc-table").innerHTML = template_built;
 
         }
         var tbal = ls[5]["static_vals"][0]["cc_balance"];
@@ -139,11 +119,8 @@
 <div id="page-container">
     <h3 id="expense_header">Credit Card Manager</h3>
     <span id="add-new-card"><b>+Add Credit Card</b></span><br><br>
-    <div class="col-md-2 col-xs-2">name here</div>
-    <div class="col-md-2 col-xs-2">due date here</div>
-    <div class="col-md-2 col-xs-2">apr here</div>
-    <div class="col-md-2 col-xs-2">min pmt here</div>
-     <div class="col-md-2 col-xs-2">bal here</div>
-    <table id="cc-table">
-    </table>
+
+    <div id="cc-table">
+
+    </div>
 </div>
