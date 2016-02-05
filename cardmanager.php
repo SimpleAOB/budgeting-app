@@ -66,6 +66,8 @@
     });
 
     function buildPage() {
+        document.getElementById("cc-table").innerHTML = "";
+
         calmPmts();
         calBal();
         var ls = JSON.parse(localStorage.jsdbwa);
@@ -96,7 +98,7 @@
 
 
             var template_built = template_bal_built;
-            document.getElementById("cc-table").innerHTML = template_built;
+            document.getElementById("cc-table").innerHTML += template_built;
 
         }
         var tbal = ls[5]["static_vals"][0]["cc_balance"];
