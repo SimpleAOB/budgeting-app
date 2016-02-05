@@ -137,9 +137,12 @@
 
 <button onclick="showls()">Show localStorage</button>
 <div id="page-container">
-    <h1>Credit Card Manager</h1>
+    <h3 id="expense_header">Credit Card Manager</h3>
     <span id="add-new-card">+Add Credit Card</span>
+    <div class="col-md-2 col-xs-3">names here</div>
+    <div class="col-md-2 col-xs-3">input here</div>
+    <div class="col-md-2 col-xs-3">names here</div>
+    <div class="col-md-2 col-xs-3">input here</div>
     <table id="cc-table">
-
     </table>
 </div>

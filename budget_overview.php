@@ -132,13 +132,13 @@
 
         document.getElementById("income-table").innerHTML = '' +
         '<tr>' +
-        '    <th><span id="income_header">INCOME</span></th>' +
+        '    <th><h3 id="income_header">INCOME</h3></th>' +
         '    <th onclick="addIncomeRow()">+New Field</th>' +
         '</tr>' +
         '';
         document.getElementById("expense-table").innerHTML = ''+
         '<tr>' +
-        '    <th><span id="expense_header">EXPENSES</span></th>'+
+        '    <th><h3 id="expense_header">EXPENSES</h3></th>'+
         '    <th onclick="addExpenseRow()">+New Field</th>' +
         '</tr>' +
         '';
@@ -203,7 +203,10 @@
     <div onload="pageInit()" id="page-container">
         <h2 id="title"></h2>
         <table id="income-table">
-
+        <div class="row">
+  <div class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">names here</div>
+  <div class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">input here</div>
+</div>
         </table>
         <table id="expense-table">
 
