@@ -127,7 +127,15 @@
             var template_built = template_value_built;
             document.getElementById("expense-table").innerHTML += template_built;
         }
-        var net = buildNet();
+        var netV = buildNet();
+        if (netV > 0) {
+            net = '<span style="color:green">'+ netV +'</span>';
+        } else if (netV < 0) {
+            net = '<span style="color:red">'+ (-1 * netV) +'</span>';
+        } else {
+            netV = 0;
+            net = '<span style="color:orange">'+ netV +'</span>';
+        }
         document.getElementById("total_incomeSum").innerHTML = net;
     }
     </script>
