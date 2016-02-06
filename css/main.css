@@ -36,11 +36,15 @@ a {
 	font-style: 20px;
 }
 
-#income_header {
+.add_link {
+	cursor: hand;
+	cursor: pointer;
+}
+.income_header {
 	color: #1E824C;
 }
 
-#expense_header {
+.expense_header {
 	color: #D35400;
 }
 

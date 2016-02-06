@@ -143,15 +143,16 @@
 <button onclick="resetls()">Reset localStorage</button>
 <button onclick="showls()">Show localStorage</button>
     <div onload="pageInit()" id="page-container">
-        <h2 id="title"></h2>
-        <div class="income_header">
-            <h2 onclick="addIncomeRow()">Income</h2>
+        <h2 class="income_header">Income</h2>
+        <div>
+            <span class="add_link" onclick="addIncomeRow()"><b>+Add New Income</b></span>
         </div>
         <div id="income-table">
 
         </div>
-        <div class="expense_header">
-            <h2 onclick="addExpenseRow()">Expenses</h2>
+        <h2 class="expense_header">Expenses</h2>
+        <div>
+            <span class="add_link" onclick="addExpenseRow()"><b>+Add New Expense</b></span>
         </div>
         <div id="expense-table">
 

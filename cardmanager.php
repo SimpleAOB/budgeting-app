@@ -120,7 +120,7 @@
 <button onclick="showls()">Show localStorage</button>
 <div id="page-container">
     <h3 id="expense_header">Credit Card Manager</h3>
-    <span id="add-new-card"><b>+Add Credit Card</b></span><br><br>
+    <span class="add_link" id="add-new-card"><b>+Add Credit Card</b></span><br><br>
 
     <div id="cc-table">
 
