@@ -95,9 +95,9 @@
 
             var template_builder = ''+
             '<div data-irow="${key}" class="row">'+
-            '    <div id="income_name${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2"><input type="text" name="name" value="${name}" data-irow="${key}" onblur="editRow(this)"></div>'+
-            '    <div id="income_input${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2"><input type="text" name="val" value="${value}" data-irow="${key}" onblur="editRow(this)"></div>'+
-            '    <div id="income_del${key}" onclick="removeIncomeRow(this)" data-irow="${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">Delete</div>'+
+            '    <div id="income_name${key}" class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1"><input type="text" name="name" value="${name}" data-irow="${key}" onblur="editRow(this)"></div>'+
+            '    <div id="income_input${key}" class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1"><input type="text" name="val" value="${value}" data-irow="${key}" onblur="editRow(this)"></div>'+
+            '    <div id="income_del${key}" onclick="removeIncomeRow(this)" data-irow="${key}" class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1">Delete</div>'+
             '</div>'+
             '';
             var template_key_built = template_builder.replace(/\$\{key\}/gi, key);
@@ -114,9 +114,9 @@
 
             var template_builder = ''+
             '<div data-erow="${key}" class="row">'+
-            '    <div id="expense_name${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2"><input type="text" name="name" value="${name}" data-erow="${key}" onblur="editRow(this)"></div>'+
-            '    <div id="expense_input${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2"><input type="text" name="val" value="${value}" data-erow="${key}" onblur="editRow(this)"></div>'+
-            '    <div id="expense_del${key}" onclick="removeExpenseRow(this)" data-erow="${key}" class="col-md-4 col-md-offset-2 col-xs-4 col-xs-offset-2">Delete</div>'+
+            '    <div id="expense_name${key}" class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1"><input type="text" name="name" value="${name}" data-erow="${key}" onblur="editRow(this)"></div>'+
+            '    <div id="expense_input${key}" class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1"><input type="text" name="val" value="${value}" data-erow="${key}" onblur="editRow(this)"></div>'+
+            '    <div id="expense_del${key}" onclick="removeExpenseRow(this)" data-erow="${key}" class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1">Delete</div>'+
             '</div>'+
             '';
             var template_key_built = template_builder.replace(/\$\{key\}/gi, key);
@@ -143,22 +143,26 @@
 <button onclick="resetls()">Reset localStorage</button>
 <button onclick="showls()">Show localStorage</button>
     <div onload="pageInit()" id="page-container">
-        <h2 class="income_header">Income</h2>
-        <div>
-            <span class="add_link" onclick="addIncomeRow()"><b>+Add New Income</b></span>
+        <div class="row">
+            <h2 class="income_header col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1">Income</h2>
+            <div class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1">
+                <span class="add_link" onclick="addIncomeRow()"><b>+Add New Income</b></span>
+            </div>
         </div>
         <div id="income-table">
 
         </div>
-        <h2 class="expense_header">Expenses</h2>
-        <div>
-            <span class="add_link" onclick="addExpenseRow()"><b>+Add New Expense</b></span>
+        <div class="row">
+            <h2 class="expense_header col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1">Expenses</h2>
+            <div class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1">
+                <span class="add_link" onclick="addExpenseRow()"><b>+Add New Expense</b></span>
+            </div>
         </div>
         <div id="expense-table">
 
         </div>
-        <div id="total_income">
-            <div id="expense_name" class="col-md-4 col-xs-6 col-md-offset-3"><h3 id="expense_header">Total Income: </h3></div>
-            <div id="expense_input" class="col-md-2 col-xs-2"><h3 id="total_incomeSum"></h3></div>
+        <div id="total_income row">
+            <div id="expense_name" class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1"><h3 id="expense_header">Total Income: </h3></div>
+            <div id="expense_input" class=" col-md-3 col-md-offset-1 col-xs-3 col-xs-offset-1"><h3 id="total_incomeSum"></h3></div>
         </div>
     </div>
